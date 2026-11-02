@@ -7,7 +7,18 @@
     <h1>Products</h1>
     <a href="{% url 'product_create' %}">Add Product</a>
     {% for product in products %}
-        <p>{{ product.name }} - {{ product.brand }}</p>
+        <p>
+            {{ product.name }} - {{ product.brand }}
+            | Last updated: {{ product.updated_at|date:"d.m.Y H:i" }}
+        </p>
+
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
+        {% else %}
+            <p>No image available</p>
+        {% endif %}
+        <a href="{% url 'product_edit' product.pk %}">Edit</a>
+        <a href="{% url 'product_delete' product.pk %}">Delete</a>
     {% empty %}
         <p>No products yet.</p>
     {% endfor %}
