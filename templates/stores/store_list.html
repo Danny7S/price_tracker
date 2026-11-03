@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stores</title>
+</head>
+<body>
+    <h1>Stores</h1>
+
+    <a href="{% url 'store_create' %}">Add Store</a>
+
+    {% for store in stores %}
+        <p>{{ store.name }} - {{ store.address }}</p>
+    {% empty %}
+        <p>No stores yet.</p>
+    {% endfor %}
+
+    <a href="{% url 'home' %}">Home</a>
+</body>
+</html>
