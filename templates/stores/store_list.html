@@ -10,6 +10,8 @@
 
     {% for store in stores %}
         <p>{{ store.name }} - {{ store.address }}</p>
+        <a href="{% url 'store_edit' store.pk %}">Edit</a>
+        <a href="{% url 'store_delete' store.pk %}">Delete</a>
     {% empty %}
         <p>No stores yet.</p>
     {% endfor %}

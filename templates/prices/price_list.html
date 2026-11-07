@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prices</title>
+</head>
+<body>
+    <h1>Product Prices</h1>
+
+    <a href="{% url 'price_create' %}">Add Price</a>
+
+    {% for item in prices %}
+        <p>
+            {{ item.product.name }} -
+            {{ item.store.name }} -
+            {{ item.price }} €
+        </p>
+    {% empty %}
+        <p>No prices yet.</p>
+    {% endfor %}
+</body>
+</html>
