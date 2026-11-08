@@ -1,21 +1,26 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Stores</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Stores - Price Tracker{% endblock %}
+
+{% block content %}
     <h1>Stores</h1>
 
     <a href="{% url 'store_create' %}">Add Store</a>
 
-    {% for store in stores %}
-        <p>{{ store.name }} - {{ store.address }}</p>
-        <a href="{% url 'store_edit' store.pk %}">Edit</a>
-        <a href="{% url 'store_delete' store.pk %}">Delete</a>
-    {% empty %}
-        <p>No stores yet.</p>
-    {% endfor %}
+    <hr>
 
-    <a href="{% url 'home' %}">Home</a>
-</body>
-</html>
+    {% for store in stores %}
+        <div>
+            <h2>{{ store.name }}</h2>
+            <p>Address: {{ store.address }}</p>
+            <p>{{ store.description }}</p>
+
+            <a href="{% url 'store_edit' store.pk %}">Edit</a>
+            <a href="{% url 'store_delete' store.pk %}">Delete</a>
+        </div>
+        <hr>
+    {% empty %}
+        <p>No stores available.</p>
+    {% endfor %}
+{% endblock %}

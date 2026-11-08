@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Prices</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Prices - Price Tracker{% endblock %}
+
+{% block content %}
     <h1>Product Prices</h1>
 
     <a href="{% url 'price_create' %}">Add Price</a>
 
+    <hr>
+
     {% for item in prices %}
-        <p>
-            {{ item.product.name }} -
-            {{ item.store.name }} -
-            {{ item.price }} €
-        </p>
+        <div>
+            <h3>{{ item.product.name }}</h3>
+
+            <p>Store: {{ item.store.name }}</p>
+            <p>Price: {{ item.price }} €</p>
+
+            <a href="{% url 'price_edit' item.pk %}">Edit</a>
+            <a href="{% url 'price_delete' item.pk %}">Delete</a>
+        </div>
+        <hr>
     {% empty %}
-        <p>No prices yet.</p>
+        <p>No prices available.</p>
     {% endfor %}
-</body>
-</html>
+{% endblock %}

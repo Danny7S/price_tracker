@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Product</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Edit Product - Price Tracker{% endblock %}
+
+{% block content %}
     <h1>Edit Product</h1>
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}
+
         <button type="submit">Save Changes</button>
     </form>
 
     <a href="{% url 'product_list' %}">Cancel</a>
-</body>
-</html>
+{% endblock %}

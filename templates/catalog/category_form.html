@@ -1,17 +1,18 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Category</title>
-</head>
-<body>
-    <h1>Add Category</h1>
+
+{% extends 'base.html' %}
+
+{% block title %}Category Form - Price Tracker{% endblock %}
+
+{% block content %}
+    <h1>Category Form</h1>
 
     <form method="post">
         {% csrf_token %}
+
         {{ form.as_p }}
+
         <button type="submit">Save</button>
     </form>
 
-    <a href="{% url 'category_list' %}">Back to categories</a>
-</body>
-</html>
+    <a href="{% url 'category_list' %}">Cancel</a>
+{% endblock %}

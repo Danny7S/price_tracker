@@ -1,0 +1,36 @@
+
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - Price Tracker{% endblock %}
+
+{% block content %}
+    <h1>{{ product.name }}</h1>
+
+    {% if product.image %}
+        <img src="{{ product.image.url }}"
+             alt="{{ product.name }}"
+             width="200">
+    {% endif %}
+
+    <p>Brand: {{ product.brand }}</p>
+    <p>{{ product.description }}</p>
+
+    <h2>Prices by Store</h2>
+
+    {% for item in prices %}
+        <div>
+            <p>
+                {{ item.store.name }} -
+                {{ item.price }} €
+
+                {% if forloop.first %}
+                    <strong>(Lowest Price)</strong>
+                {% endif %}
+            </p>
+        </div>
+    {% empty %}
+        <p>No prices available for this product.</p>
+    {% endfor %}
+
+    <a href="{% url 'product_list' %}">Back to Products</a>
+{% endblock %}

@@ -1,28 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Products</title>
-</head>
-<body>
-    <h1>Products</h1>
-    <a href="{% url 'product_create' %}">Add Product</a>
-    {% for product in products %}
-        <p>
-            {{ product.name }} - {{ product.brand }}
-            | Last updated: {{ product.updated_at|date:"d.m.Y H:i" }}
-        </p>
 
-        {% if product.image %}
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" width="150">
-        {% else %}
-            <p>No image available</p>
-        {% endif %}
-        <a href="{% url 'product_edit' product.pk %}">Edit</a>
-        <a href="{% url 'product_delete' product.pk %}">Delete</a>
+{% extends 'base.html' %}
+
+{% block title %}Products - Price Tracker{% endblock %}
+
+{% block content %}
+
+    <h1>Products</h1>
+
+    <a href="{% url 'product_create' %}">Add Product</a>
+
+    <hr>
+
+    {% for product in products %}
+        <div>
+            {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     alt="{{ product.name }}"
+                     width="150">
+            {% endif %}
+
+            <h2>{{ product.name }}</h2>
+
+            <p>Brand: {{ product.brand }}</p>
+
+            <p>{{ product.description }}</p>
+
+            <p>
+                Last updated:
+                {{ product.updated_at|date:"d.m.Y H:i" }}
+            </p>
+
+            <a href="{% url 'product_detail' product.pk %}">
+                View Details
+            </a>
+
+            <a href="{% url 'product_edit' product.pk %}">
+                Edit
+            </a>
+
+            <a href="{% url 'product_delete' product.pk %}">
+                Delete
+            </a>
+        </div>
+
+        <hr>
+
     {% empty %}
-        <p>No products yet.</p>
+        <p>No products available.</p>
     {% endfor %}
 
-    <a href="/">Home</a>
-</body>
-</html>
+{% endblock %}

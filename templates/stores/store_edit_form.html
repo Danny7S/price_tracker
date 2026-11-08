@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Edit Store</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Edit Store - Price Tracker{% endblock %}
+
+{% block content %}
     <h1>Edit Store</h1>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
+
         <button type="submit">Save Changes</button>
     </form>
 
     <a href="{% url 'store_list' %}">Cancel</a>
-</body>
-</html>
+{% endblock %}

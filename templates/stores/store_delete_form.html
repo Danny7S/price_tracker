@@ -1,9 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete Store</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Delete Store - Price Tracker{% endblock %}
+
+{% block content %}
     <h1>Delete Store</h1>
 
     <p>Are you sure you want to delete "{{ object.name }}"?</p>
@@ -14,5 +14,4 @@
     </form>
 
     <a href="{% url 'store_list' %}">Cancel</a>
-</body>
-</html>
+{% endblock %}

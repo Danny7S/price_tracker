@@ -1,21 +1,27 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Categories</title>
-</head>
-<body>
+
+{% extends 'base.html' %}
+
+{% block title %}Categories - Price Tracker{% endblock %}
+
+{% block content %}
     <h1>Categories</h1>
 
     <a href="{% url 'category_create' %}">Add Category</a>
 
-    {% for category in categories %}
-        <p>{{ category.name }}</p>
-        <a href="{% url 'category_edit' category.pk %}">Edit</a>
-        <a href="{% url 'category_delete' category.pk %}">Delete</a>
-    {% empty %}
-        <p>No categories yet.</p>
-    {% endfor %}
+    <hr>
 
-    <a href="/">Home</a>
-</body>
-</html>
+    {% for category in categories %}
+        <div>
+            <h2>{{ category.name }}</h2>
+
+            <p>{{ category.description }}</p>
+
+            <a href="{% url 'category_edit' category.pk %}">Edit</a>
+            <a href="{% url 'category_delete' category.pk %}">Delete</a>
+        </div>
+
+        <hr>
+    {% empty %}
+        <p>No categories available.</p>
+    {% endfor %}
+{% endblock %}

@@ -1,6 +1,8 @@
 from django.shortcuts import render
+
+from prices.models import StorePrice
 from .forms import CategoryForm, ProductForm
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from .models import Category, Product
 
@@ -53,5 +55,15 @@ class ProductDeleteView(DeleteView):
     template_name = 'catalog/product_delete_form.html'
     success_url = reverse_lazy('product_list')
 
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs);
+        context['prices'] = StorePrice.objects.filter(product=self.object).order_by('price')
+
+        return context
 
 
