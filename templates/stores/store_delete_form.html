@@ -4,14 +4,14 @@
 {% block title %}Delete Store - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>Delete Store</h1>
+    <h1 class="mb-3">Delete Store</h1>
 
     <p>Are you sure you want to delete "{{ object.name }}"?</p>
 
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-    </form>
 
-    <a href="{% url 'store_list' %}">Cancel</a>
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'store_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
 {% endblock %}

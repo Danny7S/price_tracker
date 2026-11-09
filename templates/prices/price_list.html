@@ -4,24 +4,40 @@
 {% block title %}Prices - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>Product Prices</h1>
+    <h1 class="mb-3">Product Prices</h1>
 
-    <a href="{% url 'price_create' %}">Add Price</a>
+    <a href="{% url 'price_create' %}" class="btn btn-primary mb-3">
+        Add Price
+    </a>
 
-    <hr>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Store</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in prices %}
+                <tr>
+                    <td>{{ item.product.name }}</td>
+                    <td>{{ item.store.name }}</td>
+                    <td>{{ item.price }} €</td>
+                    <td>
+                        <a href="{% url 'price_edit' item.pk %}"
+                           class="btn btn-sm btn-primary">Edit</a>
 
-    {% for item in prices %}
-        <div>
-            <h3>{{ item.product.name }}</h3>
-
-            <p>Store: {{ item.store.name }}</p>
-            <p>Price: {{ item.price }} €</p>
-
-            <a href="{% url 'price_edit' item.pk %}">Edit</a>
-            <a href="{% url 'price_delete' item.pk %}">Delete</a>
-        </div>
-        <hr>
-    {% empty %}
-        <p>No prices available.</p>
-    {% endfor %}
+                        <a href="{% url 'price_delete' item.pk %}"
+                           class="btn btn-sm btn-danger">Delete</a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4">No prices available.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

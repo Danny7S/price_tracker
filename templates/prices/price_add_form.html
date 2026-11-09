@@ -4,14 +4,13 @@
 {% block title %}Add Price - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>Add Product Price</h1>
+    <h1 class="mb-3">Add Product Price</h1>
 
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
 
-        <button type="submit">Add Price</button>
+        <button type="submit" class="btn btn-primary">Add Price</button>
+        <a href="{% url 'price_list' %}" class="btn btn-secondary">Cancel</a>
     </form>
-
-    <a href="{% url 'price_list' %}">Cancel</a>
 {% endblock %}

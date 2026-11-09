@@ -1,8 +1,41 @@
+
 {% extends 'base.html' %}
 
 {% block title %}Home - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>Welcome to Price Tracker</h1>
-    <p>Compare product prices across different stores.</p>
+
+    <h1 class="mb-3">Welcome to Price Tracker</h1>
+
+    <p class="mb-4">
+        Price Tracker helps you compare product prices across
+        different stores and find the best available offers.
+        Browse categories, explore products and compare prices.
+    </p>
+
+    <h2 class="mb-3">Browse Categories</h2>
+
+    <div class="row">
+        {% for category in categories %}
+            <div class="col-md-4 mb-3">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ category.name }}</h5>
+
+                        <p class="card-text">
+                            {{ category.description }}
+                        </p>
+
+                        <a href="{% url 'product_list' %}?category={{ category.pk }}"
+                           class="btn btn-primary">
+                            View Products
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No categories available.</p>
+        {% endfor %}
+    </div>
+
 {% endblock %}

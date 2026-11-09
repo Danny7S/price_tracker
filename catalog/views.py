@@ -8,7 +8,11 @@ from .models import Category, Product
 
 
 def home(request):
-    return render(request,'home.html')
+    categories = Category.objects.all()
+
+    return render(request, 'home.html', {
+        'categories': categories
+    })
 
 class CategoryListView(ListView):
     model = Category
@@ -37,6 +41,14 @@ class ProductListView(ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     context_object_name = 'products'
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        category_id = self.request.GET.get('category')
+        if category_id:
+            queryset = queryset.filter(category__id=category_id).distinct()
+
+        return queryset
 
 class ProductCreateView(CreateView):
     model = Product

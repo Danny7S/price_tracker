@@ -4,15 +4,32 @@
 {% block title %}Category Form - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>Category Form</h1>
+<div class="container mt-4">
 
-    <form method="post">
-        {% csrf_token %}
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h3 class="mb-0">Category Form</h3>
+        </div>
 
-        {{ form.as_p }}
+        <div class="card-body">
+            <form method="post">
+                {% csrf_token %}
 
-        <button type="submit">Save</button>
-    </form>
+                {{ form.as_p }}
 
-    <a href="{% url 'category_list' %}">Cancel</a>
+                <div class="mt-4">
+                    <button type="submit" class="btn btn-success">
+                        Save
+                    </button>
+
+                    <a href="{% url 'category_list' %}"
+                       class="btn btn-secondary">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 {% endblock %}

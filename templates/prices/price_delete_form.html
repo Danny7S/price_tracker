@@ -4,7 +4,7 @@
 {% block title %}Delete Price - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>Delete Product Price</h1>
+    <h1 class="mb-3">Delete Product Price</h1>
 
     <p>
         Are you sure you want to delete the price for
@@ -13,8 +13,8 @@
 
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, Delete</button>
-    </form>
 
-    <a href="{% url 'price_list' %}">Cancel</a>
+        <button type="submit" class="btn btn-danger">Yes, Delete</button>
+        <a href="{% url 'price_list' %}" class="btn btn-secondary">Cancel</a>
+    </form>
 {% endblock %}

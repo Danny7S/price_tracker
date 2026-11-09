@@ -4,33 +4,48 @@
 {% block title %}{{ product.name }} - Price Tracker{% endblock %}
 
 {% block content %}
-    <h1>{{ product.name }}</h1>
+    <h1 class="mb-3">{{ product.name }}</h1>
 
     {% if product.image %}
         <img src="{{ product.image.url }}"
              alt="{{ product.name }}"
-             width="200">
+             width="200"
+             class="mb-3">
     {% endif %}
 
-    <p>Brand: {{ product.brand }}</p>
+    <p><strong>Brand:</strong> {{ product.brand }}</p>
     <p>{{ product.description }}</p>
 
-    <h2>Prices by Store</h2>
+    <h2 class="mt-4">Prices by Store</h2>
 
-    {% for item in prices %}
-        <div>
-            <p>
-                {{ item.store.name }} -
-                {{ item.price }} €
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Store</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in prices %}
+                <tr>
+                    <td>{{ item.store.name }}</td>
+                    <td>
+                        {{ item.price }} €
 
-                {% if forloop.first %}
-                    <strong>(Lowest Price)</strong>
-                {% endif %}
-            </p>
-        </div>
-    {% empty %}
-        <p>No prices available for this product.</p>
-    {% endfor %}
+                        {% if forloop.first %}
+                            <span class="badge bg-success">Lowest Price</span>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="2">No prices available for this product.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
-    <a href="{% url 'product_list' %}">Back to Products</a>
+    <a href="{% url 'product_list' %}" class="btn btn-secondary">
+        Back to Products
+    </a>
 {% endblock %}
