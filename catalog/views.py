@@ -5,7 +5,7 @@ from .forms import CategoryForm, ProductForm
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 from django.urls import reverse_lazy
 from .models import Category, Product
-
+from django.db.models import Q
 
 def home(request):
     categories = Category.objects.all()
@@ -44,11 +44,31 @@ class ProductListView(ListView):
 
     def get_queryset(self):
         queryset = super().get_queryset()
+
         category_id = self.request.GET.get('category')
+        search = self.request.GET.get('search')
+        sorting = self.request.GET.get('sort')
+
         if category_id:
-            queryset = queryset.filter(category__id=category_id).distinct()
+            queryset = queryset.filter(category__id=category_id)
+
+        if search:
+            queryset = queryset.filter(
+                Q(name__icontains=search) |
+                Q(brand__icontains=search)
+            )
+
+        if sorting == 'name_asc':
+            queryset = queryset.order_by('name')
+        elif sorting == 'name_desc':
+            queryset = queryset.order_by('-name')
+        elif sorting == 'newest':
+            queryset = queryset.order_by('-created_at')
+        elif sorting == 'oldest':
+            queryset = queryset.order_by('created_at')
 
         return queryset
+
 
 class ProductCreateView(CreateView):
     model = Product
