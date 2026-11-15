@@ -56,7 +56,7 @@ class StoreForm(forms.ModelForm):
     def clean_description(self):
         description = self.cleaned_data['description']
 
-        if len(description) < 300:
+        if len(description) > 300:
             raise forms.ValidationError(
                 "Store description must not exceed 300 characters."
             )

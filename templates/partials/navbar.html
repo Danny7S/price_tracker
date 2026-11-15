@@ -1,0 +1,22 @@
+
+<nav class="navbar navbar-expand bg-dark border-bottom">
+    <div class="container">
+        <a class="navbar-brand text-white" href="{% url 'home' %}">
+            Price Tracker
+        </a>
+
+        <div class="navbar-nav">
+            <a class="nav-link text-white"
+               href="{% url 'product_list' %}">Products</a>
+
+            <a class="nav-link text-white"
+               href="{% url 'category_list' %}">Categories</a>
+
+            <a class="nav-link text-white"
+               href="{% url 'store_list' %}">Stores</a>
+
+            <a class="nav-link text-white"
+               href="{% url 'price_list' %}">Prices</a>
+        </div>
+    </div>
+</nav>
