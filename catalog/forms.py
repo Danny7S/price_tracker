@@ -100,7 +100,7 @@ class ProductForm(forms.ModelForm):
                 'placeholder': 'Enter product description',
                 'rows': 3,
             }),
-            'category': forms.Select(attrs={
+            'category': forms.SelectMultiple(attrs={
                 'class': 'form-select',
             }),
             'image': forms.ClearableFileInput(attrs={
